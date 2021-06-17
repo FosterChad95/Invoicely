@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   grid: {
     marginRight: "18rem",
     marginTop: "5rem",
-    marginBottom: "6rem",
+    marginBottom: "3rem",
   },
   Typography: {
     fontWeight: "700",
@@ -28,6 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     width: "150px",
     color: "#fff",
     marginLeft: "1.5rem",
+    marginTop: ".5rem",
     position: "relative",
     fontSize: "12px",
     backgroundColor: "#7c5dfa",
