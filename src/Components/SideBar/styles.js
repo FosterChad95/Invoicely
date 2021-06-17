@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
   logo: {
     background: "#7c5dfa",
     padding: "2rem 0",
-    borderRadius: "0 10px 10px 0",
+    borderRadius: "0 20px 20px 0",
   },
   icon: {
     marginBottom: "1rem",
@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    borderRadius: "0 10px 10px 0",
+    borderRadius: "0 20px 20px 0",
     backgroundColor: "#1e2139",
   },
   purple: {

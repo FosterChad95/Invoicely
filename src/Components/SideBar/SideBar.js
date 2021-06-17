@@ -28,11 +28,11 @@ const SideBar = () => {
           </Grid>
 
           <Grid item>
-            <IconButton>
+            <IconButton aria-label="Change Theme">
               <Brightness3Icon color="primary" className={classes.icon} />
             </IconButton>
             <Divider className={classes.divider} />
-            <IconButton>
+            <IconButton aria-label="Open Account Settings">
               <Avatar className={classes.purple}>CF</Avatar>
             </IconButton>
           </Grid>
