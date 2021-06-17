@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Drawer,
-  Avatar,
-  List,
-  ListItemIcon,
-  ListItem,
-  Grid,
-} from "@material-ui/core";
+import { Drawer, Avatar, Grid, IconButton, Divider } from "@material-ui/core";
 import { useStyles } from "./styles";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
@@ -27,12 +20,21 @@ const SideBar = () => {
           align="center"
           direction="column"
           justify="space-between"
+          xs={12}
+          className={classes.grid}
         >
-          <Grid item xs={12}>
+          <Grid item className={classes.logo}>
             <ReactLogo />
           </Grid>
-          <Grid item xs={12}>
-            <Avatar className={classes.purple}>CF</Avatar>
+
+          <Grid item>
+            <IconButton>
+              <Brightness3Icon color="primary" className={classes.icon} />
+            </IconButton>
+            <Divider className={classes.divider} />
+            <IconButton>
+              <Avatar className={classes.purple}>CF</Avatar>
+            </IconButton>
           </Grid>
         </Grid>
       </Drawer>
