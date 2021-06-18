@@ -5,9 +5,8 @@ import { getInvoices } from "../../lib/api";
 import InvoiceListItem from "../InvoiceListItem/InvoiceListItem";
 import { useStyles } from "./styles";
 import Pagination from "@material-ui/lab/Pagination";
-import { ReactComponent as ReactLogo } from "../../assets/image-avatar.jpg";
 
-const InvoiceList = ({ onFiltered }) => {
+const InvoiceList = ({ onFiltered, onNumberChange }) => {
   const { requestSent, error, loading, data } = useRequest(getInvoices);
   const [page, setPage] = useState(1);
   const [postsPerPage] = useState(4);
@@ -15,7 +14,6 @@ const InvoiceList = ({ onFiltered }) => {
 
   useEffect(() => {
     requestSent(getInvoices);
-
     return () => requestSent(getInvoices);
   }, [requestSent]);
 
@@ -33,20 +31,25 @@ const InvoiceList = ({ onFiltered }) => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   if (data) {
     currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
+    onNumberChange(data.length);
   }
   const paginate = (pageNumber) => setPage(pageNumber);
+
   //Formatting Total for invoices into US Currency
   const format = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
+
+  let numPage = 0;
+
   return (
     <Grid container justify="center" xs={12}>
       {loading ? (
         <CircularProgress />
       ) : (
         <List className={classes.List}>
-          {onFiltered !== null
+          {onFiltered !== "All"
             ? currentPosts
                 .filter((el) => el.status === onFiltered.toLowerCase())
                 .map((el, index) => (

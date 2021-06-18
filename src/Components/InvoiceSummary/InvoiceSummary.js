@@ -10,13 +10,19 @@ import {
 import { useStyles } from "./styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import InvoiceList from "../InvoiceList/InvoiceList";
+import { ReactComponent as ReactLogo } from "../../assets/illustration-empty.svg";
 
 const InvoiceSummary = () => {
   const classes = useStyles();
-  const [filteredBy, setFilteredBy] = useState(null);
+  const [filteredBy, setFilteredBy] = useState("All");
+  const [number, setNumber] = useState(null);
 
   const handleSelect = (event) => {
     setFilteredBy(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    setNumber(event);
   };
 
   return (
@@ -32,7 +38,7 @@ const InvoiceSummary = () => {
             Invoices
           </Typography>
           <Typography variant="subtitle1" className={classes.subtitle}>
-            There are 7 total invoices
+            There are {number} total invoices
           </Typography>
         </Grid>
         <Grid className={classes.grid} item alignContent="center">
@@ -47,7 +53,7 @@ const InvoiceSummary = () => {
               className={classes.select}
               onChange={handleSelect}
             >
-              <option aria-label="None" value="" />
+              {/* <option aria-label="None" value="" /> */}
               <option value="All">All</option>
               <option value="Draft">Draft</option>
               <option value="Paid">Paid</option>
@@ -64,7 +70,14 @@ const InvoiceSummary = () => {
           </Button>
         </Grid>
         <Grid item xs={3} />
-        <InvoiceList onFiltered={filteredBy} />
+        {number === 0 ? (
+          <ReactLogo />
+        ) : (
+          <InvoiceList
+            onFiltered={filteredBy}
+            onNumberChange={handleNumberChange}
+          />
+        )}
         <Grid item xs={false} md={2} />
       </Grid>
     </>
