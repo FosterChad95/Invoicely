@@ -13,9 +13,8 @@ const InvoiceList = ({ onFiltered, onNumberChange }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    requestSent(getInvoices);
-    return () => requestSent(getInvoices);
-  }, [requestSent]);
+    requestSent(onFiltered);
+  }, [onFiltered, requestSent]);
 
   if (error) {
     return (
@@ -41,37 +40,22 @@ const InvoiceList = ({ onFiltered, onNumberChange }) => {
     currency: "USD",
   });
 
-  let numPage = 0;
-
   return (
     <Grid container justify="center" xs={12}>
       {loading ? (
         <CircularProgress />
       ) : (
         <List className={classes.List}>
-          {onFiltered !== "All"
-            ? currentPosts
-                .filter((el) => el.status === onFiltered.toLowerCase())
-                .map((el, index) => (
-                  <InvoiceListItem
-                    key={index}
-                    id={el.id}
-                    due={el.paymentDue}
-                    name={el.clientName}
-                    total={format.format(el.total)}
-                    status={el.status}
-                  />
-                ))
-            : currentPosts.map((el, index) => (
-                <InvoiceListItem
-                  key={index}
-                  id={el.id}
-                  due={el.paymentDue}
-                  name={el.clientName}
-                  total={format.format(el.total)}
-                  status={el.status}
-                />
-              ))}
+          {currentPosts.map((el, index) => (
+            <InvoiceListItem
+              key={index}
+              id={el.id}
+              due={el.paymentDue}
+              name={el.clientName}
+              total={format.format(el.total)}
+              status={el.status}
+            />
+          ))}
           <Grid item xs={2} />
           <Pagination
             count={Math.ceil(data.length / postsPerPage)}

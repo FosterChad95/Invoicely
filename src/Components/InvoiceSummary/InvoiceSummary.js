@@ -70,14 +70,19 @@ const InvoiceSummary = () => {
           </Button>
         </Grid>
         <Grid item xs={3} />
-        {number === 0 ? (
-          <ReactLogo />
-        ) : (
-          <InvoiceList
-            onFiltered={filteredBy}
-            onNumberChange={handleNumberChange}
-          />
-        )}
+        <Grid container justify="center">
+          {number === 0 ? (
+            <div>
+              <ReactLogo />
+              <Typography variant="h5">There are no invoices</Typography>
+            </div>
+          ) : (
+            <InvoiceList
+              onFiltered={filteredBy}
+              onNumberChange={handleNumberChange}
+            />
+          )}
+        </Grid>
         <Grid item xs={false} md={2} />
       </Grid>
     </>

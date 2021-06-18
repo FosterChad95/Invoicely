@@ -1,6 +1,6 @@
 const FIREBASE_DOMAIN = "https://invoicely-3c3a9-default-rtdb.firebaseio.com";
 
-export async function getInvoices() {
+export async function getInvoices(type) {
   const response = await fetch(`${FIREBASE_DOMAIN}/.json`);
 
   const data = await response.json();
@@ -15,5 +15,11 @@ export async function getInvoices() {
 
   data.forEach((el) => invoices.push(el));
 
-  return invoices;
+  if (type === "All") {
+    return invoices;
+  }
+
+  const filteredBy = invoices.filter((el) => el.status === type.toLowerCase());
+  console.log(invoices);
+  return filteredBy;
 }
