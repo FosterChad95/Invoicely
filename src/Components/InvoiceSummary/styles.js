@@ -2,9 +2,9 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
   grid: {
-    marginRight: "18rem",
     marginTop: "5rem",
-    marginBottom: "3rem",
+    marginBottom: ".75rem",
+    marginLeft: "auto",
   },
   Typography: {
     fontWeight: "700",

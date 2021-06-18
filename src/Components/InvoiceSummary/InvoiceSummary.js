@@ -10,7 +10,6 @@ import {
 import { useStyles } from "./styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import InvoiceList from "../InvoiceList/InvoiceList";
-import { getInvoices } from "../../lib/api";
 
 const InvoiceSummary = () => {
   const classes = useStyles();
@@ -22,8 +21,8 @@ const InvoiceSummary = () => {
 
   return (
     <>
-      <Grid container alignItems="center">
-        <Grid item xs={0} md={3} xl={4} />
+      <Grid container spacing={9}>
+        <Grid item xs={false} md={2} xl={4} />
         <Grid item className={classes.grid}>
           <Typography
             variant="h4"
@@ -36,7 +35,7 @@ const InvoiceSummary = () => {
             There are 7 total invoices
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid className={classes.grid} item alignContent="center">
           <FormControl className={classes.formControl}>
             <InputLabel className={classes.select} htmlFor="filter-invoice">
               Filter by status
@@ -65,8 +64,8 @@ const InvoiceSummary = () => {
           </Button>
         </Grid>
         <Grid item xs={3} />
-        <InvoiceList />
-        <Grid item xs={0} md={2} />
+        <InvoiceList onFiltered={filteredBy} />
+        <Grid item xs={false} md={2} />
       </Grid>
     </>
   );

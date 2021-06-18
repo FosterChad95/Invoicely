@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useCallback } from "react";
+import { useReducer, useCallback } from "react";
 
 const initialState = {
   error: null,
   loading: true,
-  data: [],
+  data: null,
 };
 
 const reducer = (state, action) => {
@@ -11,7 +11,7 @@ const reducer = (state, action) => {
     return {
       error: action.errorMessage,
       loading: false,
-      data: [],
+      data: null,
     };
   }
 
