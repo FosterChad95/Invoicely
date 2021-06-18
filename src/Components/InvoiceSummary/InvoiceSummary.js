@@ -10,6 +10,7 @@ import {
 import { useStyles } from "./styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import InvoiceList from "../InvoiceList/InvoiceList";
+import { getInvoices } from "../../lib/api";
 
 const InvoiceSummary = () => {
   const classes = useStyles();
@@ -48,6 +49,7 @@ const InvoiceSummary = () => {
               onChange={handleSelect}
             >
               <option aria-label="None" value="" />
+              <option value="All">All</option>
               <option value="Draft">Draft</option>
               <option value="Paid">Paid</option>
               <option value="Pending">Pending</option>
@@ -59,7 +61,7 @@ const InvoiceSummary = () => {
             variant="contained"
           >
             <AddCircleIcon className={classes.iconButton} />
-            <span className={classes.span}>New Invoice </span>
+            <span className={classes.span}>New Invoice</span>
           </Button>
         </Grid>
         <Grid item xs={3} />

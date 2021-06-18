@@ -1,8 +1,9 @@
 import React from "react";
 import SideBar from "./Components/SideBar/SideBar";
 import InvoiceSummary from "./Components/InvoiceSummary/InvoiceSummary";
-import { Paper, Grid } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import { useStyles } from "./styles";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   const classes = useStyles();
@@ -10,7 +11,12 @@ function App() {
     <>
       <Paper className={classes.paper}>
         <SideBar />
-        <InvoiceSummary />
+        <Switch>
+          <Route exact path="/">
+            <InvoiceSummary />
+          </Route>
+          <Route exact path="/invoice-detail/:invoiceId"></Route>
+        </Switch>
       </Paper>
     </>
   );

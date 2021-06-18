@@ -30,7 +30,6 @@ export const useStyles = makeStyles((theme) => ({
     padding: ".5rem 1.5rem",
     borderRadius: "6px",
     backgroundColor: "rgba(51,214,159,.1)",
-    textAlign: "center",
     "&::before": {
       content: '""',
       position: "absolute",
