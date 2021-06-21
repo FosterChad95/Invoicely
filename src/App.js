@@ -4,7 +4,7 @@ import InvoiceSummary from "./Components/InvoiceSummary/InvoiceSummary";
 import { Paper } from "@material-ui/core";
 import { useStyles } from "./styles";
 import { Route, Switch } from "react-router-dom";
-import AddInvoiceForm from "./Components/AddInvoiceForm/AddInvoiceForm";
+import InvoiceForm from "./Components/InvoiceForm/InvoiceForm";
 
 function App() {
   const classes = useStyles();
@@ -18,7 +18,7 @@ function App() {
     <>
       <Paper className={classes.paper}>
         <SideBar />
-        <AddInvoiceForm onOpen={drawer} onClose={toggleDrawerHandler} />
+        <InvoiceForm onOpen={drawer} onClose={toggleDrawerHandler} />
         <Switch>
           <Route exact path="/">
             <InvoiceSummary onOpen={toggleDrawerHandler} />
