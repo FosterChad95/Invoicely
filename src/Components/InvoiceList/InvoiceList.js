@@ -14,6 +14,7 @@ const InvoiceList = ({ onFiltered, onNumberChange }) => {
 
   useEffect(() => {
     requestSent(onFiltered);
+    setPage(1);
   }, [onFiltered, requestSent]);
 
   if (error) {

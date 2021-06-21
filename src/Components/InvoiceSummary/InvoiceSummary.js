@@ -12,7 +12,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import InvoiceList from "../InvoiceList/InvoiceList";
 import { ReactComponent as ReactLogo } from "../../assets/illustration-empty.svg";
 
-const InvoiceSummary = () => {
+const InvoiceSummary = ({ onOpen }) => {
   const classes = useStyles();
   const [filteredBy, setFilteredBy] = useState("All");
   const [number, setNumber] = useState(null);
@@ -28,7 +28,7 @@ const InvoiceSummary = () => {
   return (
     <>
       <Grid container spacing={9}>
-        <Grid item xs={false} md={2} xl={4} />
+        <Grid item xs={false} md={2} />
         <Grid item className={classes.grid}>
           <Typography
             variant="h4"
@@ -64,6 +64,7 @@ const InvoiceSummary = () => {
             className={classes.button}
             color={"primary"}
             variant="contained"
+            onClick={() => onOpen(true)}
           >
             <AddCircleIcon className={classes.iconButton} />
             <span className={classes.span}>New Invoice</span>

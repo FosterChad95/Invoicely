@@ -4,6 +4,10 @@ import { deepPurple } from "@material-ui/core/colors";
 const drawerWidth = 103;
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    position: "relative",
+    zIndex: 1400,
+  },
   logo: {
     background: "#7c5dfa",
     padding: "2rem 0",
