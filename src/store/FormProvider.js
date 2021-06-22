@@ -53,10 +53,22 @@ export const FormContext = React.createContext({
   addItem: (name, qty, price, total) => {},
 });
 
-const formReducer = (state, action) => {};
+const formReducer = (state, action) => {
+  if (action.type === "SEND") {
+  }
+
+  return defaultFormState;
+};
 
 const FormContextProvider = (props) => {
   const [formState, dispatchAction] = useReducer(formReducer, defaultFormState);
+
+  const handleSubmit = (values) => {
+    dispatchAction({
+      type: "SEND",
+      data: values,
+    });
+  };
 
   const formContextValue = {};
 
