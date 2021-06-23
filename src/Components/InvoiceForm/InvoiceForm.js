@@ -24,22 +24,6 @@ const InvoiceForm = ({ onOpen, onClose }) => {
     setNumItems((item) => item - 1);
   };
 
-  const FilledItems = () => {
-    let appendedItems = [];
-    for (let i = 0; i < numItems; i++) {
-      appendedItems.push(
-        <ItemListForm
-          key={i}
-          onChange={handleChange}
-          vals={values}
-          errors={errors}
-          onDelete={deleteItemHandler}
-        />
-      );
-    }
-    return appendedItems;
-  };
-
   const handleSubmitHandler = (event) => {};
 
   function submitForm() {
@@ -92,7 +76,13 @@ const InvoiceForm = ({ onOpen, onClose }) => {
                   </Typography>
                 )}
               </Grid>
-              {errors.items || numItems === 0 ? <NoItems /> : <FilledItems />}
+              {errors.items || numItems === 0 ? (
+                <NoItems />
+              ) : (
+                [...Array(numItems)].map((_, i) => (
+                  <ItemListForm key={i} id={i} onDelete={deleteItemHandler} />
+                ))
+              )}
               <Grid item xs={12} justify="center">
                 <Button
                   fullWidth

@@ -5,6 +5,7 @@ import { getInvoices } from "../../lib/api";
 import InvoiceListItem from "../InvoiceListItem/InvoiceListItem";
 import { useStyles } from "./styles";
 import Pagination from "@material-ui/lab/Pagination";
+import toUsd from "../../helpers/toUsd";
 
 const InvoiceList = ({ onFiltered, onNumberChange }) => {
   const { requestSent, error, loading, data } = useRequest(getInvoices);
@@ -53,7 +54,7 @@ const InvoiceList = ({ onFiltered, onNumberChange }) => {
               id={el.id}
               due={el.paymentDue}
               name={el.clientName}
-              total={format.format(el.total)}
+              total={toUsd(el.total)}
               status={el.status}
             />
           ))}
