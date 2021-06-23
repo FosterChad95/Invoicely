@@ -12,16 +12,9 @@ const defaultFormState = {
   toPost: "",
   toCountry: "",
   invoiceDate: "",
-  paymentTerms: "",
+  paymentTerms: 1,
   projectDescription: "",
-  items: [
-    {
-      name: "",
-      qty: null,
-      price: null,
-      total: null,
-    },
-  ],
+  items: [],
 };
 
 export const FormContext = React.createContext({
@@ -50,11 +43,13 @@ export const FormContext = React.createContext({
   send: () => {},
   discard: () => {},
   deleteItem: () => {},
-  addItem: (name, qty, price, total) => {},
+  addItem: () => {},
 });
 
 const formReducer = (state, action) => {
   if (action.type === "SEND") {
+  }
+  if (action.type === "ADD") {
   }
 
   return defaultFormState;
@@ -63,14 +58,11 @@ const formReducer = (state, action) => {
 const FormContextProvider = (props) => {
   const [formState, dispatchAction] = useReducer(formReducer, defaultFormState);
 
-  const handleSubmit = (values) => {
-    dispatchAction({
-      type: "SEND",
-      data: values,
-    });
-  };
+  const addItemHandler = (event) => {};
 
-  const formContextValue = {};
+  const formContextValue = {
+    addItem: addItemHandler,
+  };
 
   return (
     <FormContext.Provider value={formContextValue}>

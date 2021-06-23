@@ -17,11 +17,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   container: {
     position: "relative",
+    marginBottom: "1rem",
   },
   icon: {
     position: "absolute",
-    top: "30%",
-    right: -30,
+    top: "17%",
+    right: -45,
     color: "rgba(0,0,0,.3)",
 
     "&:hover": {

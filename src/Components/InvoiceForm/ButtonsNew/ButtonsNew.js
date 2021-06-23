@@ -2,8 +2,9 @@ import React from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useStyles } from "./styles";
 
-const ButtonsNew = () => {
+const ButtonsNew = ({ onSubmit }) => {
   const classes = useStyles();
+
   return (
     <>
       <Grid justify="center" container>
@@ -11,6 +12,7 @@ const ButtonsNew = () => {
           <Button
             style={{ marginRight: "7rem", fontSize: "12px" }}
             className={classes.Button}
+            onClick={() => onSubmit("DISCARD")}
           >
             Discard
           </Button>
@@ -21,6 +23,7 @@ const ButtonsNew = () => {
               fontSize: "12px",
             }}
             className={classes.Button}
+            onClick={() => onSubmit("SAVE")}
           >
             Save as Draft
           </Button>
@@ -32,6 +35,7 @@ const ButtonsNew = () => {
               fontSize: "12px",
             }}
             className={classes.Button}
+            onClick={() => onSubmit("SEND")}
           >
             Save & Send
           </Button>

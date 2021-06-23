@@ -1,27 +1,12 @@
 import React from "react";
-import {
-  Grid,
-  InputLabel,
-  TextField,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { Grid, InputLabel, TextField, IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useStyles } from "./styles";
 
-const ItemListForm = () => {
+const ItemListForm = ({ onChange, vals, errors, onDelete }) => {
   const classes = useStyles();
   return (
     <>
-      <Grid item xs={12}>
-        <Typography
-          variant="h6"
-          style={{ marginTop: "2rem", fontWeight: 700, opacity: 0.5 }}
-          gutterBottom
-        >
-          Item List
-        </Typography>
-      </Grid>
       <Grid className={classes.container} item xs={12} sm={4}>
         <InputLabel htmlFor="Item Name" className={classes.inputTotal}>
           Item Name
@@ -32,6 +17,7 @@ const ItemListForm = () => {
           fullWidth
           variant="outlined"
           InputProps={{ className: classes.input }}
+          name="itemsName"
         />
       </Grid>
       <Grid className={classes.container} item xs={12} sm={2}>
@@ -44,6 +30,7 @@ const ItemListForm = () => {
           fullWidth
           variant="outlined"
           InputProps={{ className: classes.input }}
+          name="itemsQty"
         />
       </Grid>
       <Grid className={classes.container} item xs={12} sm={3}>
@@ -56,6 +43,7 @@ const ItemListForm = () => {
           fullWidth
           variant="outlined"
           InputProps={{ className: classes.input }}
+          name="itemsPrice"
         />
       </Grid>
       <Grid className={classes.container} item xs={12} sm={2}>
@@ -70,19 +58,11 @@ const ItemListForm = () => {
           variant="outlined"
           value={"140$"}
           InputProps={{ className: classes.input }}
+          name="itemsTotal"
         />
-
-        <DeleteIcon className={classes.icon} />
-      </Grid>
-      <Grid item xs={12} justify="center">
-        <Button
-          fullWidth
-          disableElevation
-          className={classes.Button}
-          variant="contained"
-        >
-          + Add New Item
-        </Button>
+        <IconButton className={classes.icon} onClick={onDelete}>
+          <DeleteIcon />
+        </IconButton>
       </Grid>
     </>
   );
