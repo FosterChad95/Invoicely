@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { Grid, Drawer, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./styles";
@@ -12,31 +12,17 @@ import useForm from "../../hooks/use-form";
 
 const InvoiceForm = ({ onOpen, onClose }) => {
   const classes = useStyles();
-  const [numItems, setNumItems] = useState(0);
   const formCtx = useContext(FormContext);
   const { values, errors, handleChange, handleSubmit } = useForm(
     submitForm,
     validate
   );
 
-  const deleteItemHandler = () => {
-    if (numItems === 0) return;
-    setNumItems((item) => item - 1);
-  };
-
-  const handleSubmitHandler = (event) => {};
+  const handleSubmitHandler = () => {};
 
   function submitForm() {
     onClose(false);
   }
-
-  const NoItems = () => (
-    <>
-      <Typography variant="h5" color="primary">
-        {errors.items || ""}
-      </Typography>
-    </>
-  );
 
   return (
     <>
@@ -66,34 +52,26 @@ const InvoiceForm = ({ onOpen, onClose }) => {
                 errors={errors}
               />
               <Grid item xs={12}>
-                {!numItems === 0 && (
-                  <Typography
-                    variant="h6"
-                    style={{ marginTop: "2rem", fontWeight: 700, opacity: 0.5 }}
-                    gutterBottom
-                  >
-                    Item List
-                  </Typography>
-                )}
-              </Grid>
-              {errors.items || numItems === 0 ? (
-                <NoItems />
-              ) : (
-                [...Array(numItems)].map((_, i) => (
-                  <ItemListForm key={i} id={i} onDelete={deleteItemHandler} />
-                ))
-              )}
-              <Grid item xs={12} justify="center">
-                <Button
-                  fullWidth
-                  disableElevation
-                  className={classes.Button}
-                  variant="contained"
-                  onClick={() => setNumItems((item) => item + 1)}
+                <Typography
+                  variant="h6"
+                  style={{ marginTop: "2rem", fontWeight: 700, opacity: 0.5 }}
+                  gutterBottom
                 >
-                  + Add New Item
-                </Button>
+                  Item List
+                </Typography>
               </Grid>
+              {formCtx.items.map((item, ind) => (
+                <ItemListForm
+                  key={ind}
+                  id={ind + 1}
+                  name={item.itemsName}
+                  qty={item.itemsQty}
+                  price={item.itemsPrice}
+                  total={item.itemsTotal}
+                  first={false}
+                />
+              ))}
+              <ItemListForm first={true} />
               <div style={{ margin: "auto" }}>
                 <ButtonsNew onSubmit={handleSubmitHandler} />
               </div>

@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { Grid, InputLabel, TextField, IconButton } from "@material-ui/core";
+import React, { useState, useEffect, useContext } from "react";
+import {
+  Grid,
+  InputLabel,
+  TextField,
+  IconButton,
+  Button,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useStyles } from "./styles";
 import totalCalc from "../../../helpers/totalCalc";
+import { FormContext } from "../../../store/FormProvider";
 
-const ItemListForm = ({ id, onDelete }) => {
+const ItemListForm = ({ id, name, qty, price, total, first }) => {
   const classes = useStyles();
+  const formCtx = useContext(FormContext);
 
   const [itemList, setItemList] = useState({
-    id: id,
     itemsName: "",
     itemsQty: "",
     itemsPrice: "",
-    total: 0,
+    itemsTotal: 0,
   });
 
   useEffect(() => {
@@ -21,12 +28,22 @@ const ItemListForm = ({ id, onDelete }) => {
         return;
       const totals = totalCalc(+itemList.itemsPrice, +itemList.itemsQty);
       console.log(totals);
-      setItemList((prevState) => ({ ...prevState, total: totals }));
+      setItemList((prevState) => ({ ...prevState, itemsTotal: totals }));
     }, 700);
     return () => {
       clearTimeout(timer);
     };
   }, [itemList.itemsPrice, itemList.itemsQty]);
+
+  const onClickHandler = () => {
+    formCtx.addItem(itemList);
+    setItemList({
+      itemsName: "",
+      itemsQty: "",
+      itemsPrice: "",
+      itemsTotal: "",
+    });
+  };
 
   const onChangeHandler = (event) => {
     event.persist();
@@ -47,6 +64,7 @@ const ItemListForm = ({ id, onDelete }) => {
           InputLabelProps={{ className: classes.input }}
           onChange={onChangeHandler}
           fullWidth
+          value={name || itemList.itemsName}
           variant="outlined"
           InputProps={{ className: classes.input }}
           name="itemsName"
@@ -61,6 +79,7 @@ const ItemListForm = ({ id, onDelete }) => {
           onChange={onChangeHandler}
           InputLabelProps={{ className: classes.input }}
           fullWidth
+          value={qty || itemList.itemsQty}
           variant="outlined"
           InputProps={{ className: classes.input }}
           name="itemsQty"
@@ -75,6 +94,7 @@ const ItemListForm = ({ id, onDelete }) => {
           InputLabelProps={{ className: classes.input }}
           onChange={onChangeHandler}
           fullWidth
+          value={price || itemList.itemsPrice}
           variant="outlined"
           InputProps={{ className: classes.input }}
           name="itemsPrice"
@@ -87,16 +107,37 @@ const ItemListForm = ({ id, onDelete }) => {
         <TextField
           id="Total"
           disabled
-          value={itemList.total}
           InputLabelProps={{ className: classes.input }}
           fullWidth
+          value={total || itemList.itemsTotal}
           variant="outlined"
           InputProps={{ className: classes.input }}
           name="itemsTotal"
         />
-        <IconButton className={classes.icon} onClick={(id) => onDelete(id)}>
-          <DeleteIcon />
-        </IconButton>
+        {!first && (
+          <IconButton
+            className={classes.icon}
+            onClick={() => formCtx.deleteItem(id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        )}
+      </Grid>
+
+      <Grid item xs={12} justify="center">
+        {!first ? (
+          ""
+        ) : (
+          <Button
+            fullWidth
+            disableElevation
+            className={classes.Button}
+            variant="contained"
+            onClick={onClickHandler}
+          >
+            + Add New Item
+          </Button>
+        )}
       </Grid>
     </>
   );

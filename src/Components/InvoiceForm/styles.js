@@ -70,5 +70,8 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: "#dfe3fa",
     },
   },
+  noItems: {
+    padding: "4rem",
+  },
   bottomButtons: {},
 }));
