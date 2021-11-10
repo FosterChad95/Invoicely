@@ -26,6 +26,8 @@ const formReducer = (state, action) => {
   if (action.type === "DELETE") {
     const filteredItems = state.items.filter((item) => item.id !== action.id);
 
+    console.log();
+
     return {
       items: filteredItems,
     };
@@ -37,10 +39,11 @@ const formReducer = (state, action) => {
 const FormContextProvider = (props) => {
   const [formState, dispatchAction] = useReducer(formReducer, defaultFormState);
 
-  const addItemHandler = (item) => {
+  const addItemHandler = (item, id) => {
     dispatchAction({
       type: "ADD",
       item,
+      id,
     });
   };
 

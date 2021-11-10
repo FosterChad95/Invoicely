@@ -27,7 +27,6 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
       if (itemList.itemsQty.length === 0 || itemList.itemsPrice.length === 0)
         return;
       const totals = totalCalc(+itemList.itemsPrice, +itemList.itemsQty);
-      console.log(totals);
       setItemList((prevState) => ({ ...prevState, itemsTotal: totals }));
     }, 700);
     return () => {
@@ -123,7 +122,6 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
           </IconButton>
         )}
       </Grid>
-
       <Grid item xs={12} justify="center">
         {!first ? (
           ""

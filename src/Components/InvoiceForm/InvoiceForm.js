@@ -63,7 +63,7 @@ const InvoiceForm = ({ onOpen, onClose }) => {
               {formCtx.items.map((item, ind) => (
                 <ItemListForm
                   key={ind}
-                  id={ind + 1}
+                  id={ind}
                   name={item.itemsName}
                   qty={item.itemsQty}
                   price={item.itemsPrice}
