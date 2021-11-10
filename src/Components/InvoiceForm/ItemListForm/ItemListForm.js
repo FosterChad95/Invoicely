@@ -35,7 +35,10 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
   }, [itemList.itemsPrice, itemList.itemsQty]);
 
   const onClickHandler = () => {
-    formCtx.addItem(itemList);
+    formCtx.addItem(
+      itemList,
+      `${itemList.itemsName} - ${itemList.itemsQty} - ${itemList.itemsTotal}`
+    );
     setItemList({
       itemsName: "",
       itemsQty: "",
@@ -43,6 +46,8 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
       itemsTotal: "",
     });
   };
+
+  console.log("rendering");
 
   const onChangeHandler = (event) => {
     event.persist();
@@ -116,7 +121,11 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
         {!first && (
           <IconButton
             className={classes.icon}
-            onClick={() => formCtx.deleteItem(id)}
+            onClick={() =>
+              formCtx.deleteItem.bind(
+                `${itemList.itemsName} - ${itemList.itemsQty} - ${itemList.itemsTotal}`
+              )
+            }
           >
             <DeleteIcon />
           </IconButton>
@@ -128,6 +137,14 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
         ) : (
           <Button
             fullWidth
+            disabled={
+              !(
+                itemList.itemsName &&
+                itemList.itemsPrice &&
+                itemList.itemsQty &&
+                itemList.itemsTotal
+              )
+            }
             disableElevation
             className={classes.Button}
             variant="contained"

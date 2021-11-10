@@ -18,15 +18,16 @@ const formReducer = (state, action) => {
   if (action.type === "SEND") {
   }
   if (action.type === "ADD") {
-    const newItems = [...state.items].concat(action.item);
+    const newItems = [...state.items].concat({ ...action.item, id: action.id });
+
+    console.log(newItems);
+
     return {
       items: newItems,
     };
   }
   if (action.type === "DELETE") {
     const filteredItems = state.items.filter((item) => item.id !== action.id);
-
-    console.log();
 
     return {
       items: filteredItems,

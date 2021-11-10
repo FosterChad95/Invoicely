@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { Grid, Drawer, Typography, Button } from "@material-ui/core";
 import { useStyles } from "./styles";
@@ -17,12 +17,21 @@ const InvoiceForm = ({ onOpen, onClose }) => {
     submitForm,
     validate
   );
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setItems(formCtx.items ? formCtx.items : null);
+    }, 700);
+  }, [formCtx.items]);
 
   const handleSubmitHandler = () => {};
 
   function submitForm() {
     onClose(false);
   }
+
+  console.log(items);
 
   return (
     <>
@@ -60,10 +69,10 @@ const InvoiceForm = ({ onOpen, onClose }) => {
                   Item List
                 </Typography>
               </Grid>
-              {formCtx.items.map((item, ind) => (
+              {items.map((item, ind) => (
                 <ItemListForm
                   key={ind}
-                  id={ind}
+                  id={item?.id}
                   name={item.itemsName}
                   qty={item.itemsQty}
                   price={item.itemsPrice}
