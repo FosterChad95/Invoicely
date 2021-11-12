@@ -13,25 +13,39 @@ import useForm from "../../hooks/use-form";
 const InvoiceForm = ({ onOpen, onClose }) => {
   const classes = useStyles();
   const formCtx = useContext(FormContext);
+  const [clear, setClear] = useState(false);
   const { values, errors, handleChange, handleSubmit } = useForm(
     submitForm,
-    validate
+    validate,
+    clear
   );
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
       setItems(formCtx.items ? formCtx.items : null);
-    }, 700);
+    }, 200);
   }, [formCtx.items]);
 
-  const handleSubmitHandler = () => {};
+  const handleSubmitHandler = (response) => {
+    switch (response) {
+      case "SUBMIT":
+        submitForm();
+        break;
+      case "DISCARD":
+        onClose(false);
+        setItems([]);
+        setClear(true);
+        setClear(false);
+        break;
+      default:
+        break;
+    }
+  };
 
   function submitForm() {
     onClose(false);
   }
-
-  console.log(items);
 
   return (
     <>

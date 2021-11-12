@@ -152,6 +152,7 @@ const BillToForm = ({ onChange, vals, errors }) => {
           }
           InputLabelProps={{ className: classes.input }}
           fullWidth
+          onChange={(event) => onChange(event)}
           variant="outlined"
           value={vals.projectDescription}
           InputProps={{ className: classes.input }}

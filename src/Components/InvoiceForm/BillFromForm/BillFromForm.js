@@ -17,6 +17,7 @@ const BillFromForm = ({ onChange, vals, errors }) => {
           label={errors.fromAddress ? errors.fromAddress : "Street Address"}
           InputLabelProps={{ className: classes.input }}
           fullWidth
+          onChange={(event) => onChange(event)}
           value={vals.fromAddress}
           variant="outlined"
           InputProps={{ className: classes.input }}

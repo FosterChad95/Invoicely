@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-import toUsd from "../helpers/toUsd";
 
 const defaultFormState = {
   items: [],
@@ -19,8 +18,6 @@ const formReducer = (state, action) => {
   }
   if (action.type === "ADD") {
     const newItems = [...state.items].concat({ ...action.item, id: action.id });
-
-    console.log(newItems);
 
     return {
       items: newItems,
@@ -49,6 +46,7 @@ const FormContextProvider = (props) => {
   };
 
   const deleteItemHandler = (id) => {
+    console.log(id);
     dispatchAction({
       type: "DELETE",
       id,

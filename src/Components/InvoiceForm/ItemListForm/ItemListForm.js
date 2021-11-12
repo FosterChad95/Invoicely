@@ -29,6 +29,7 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
       const totals = totalCalc(+itemList.itemsPrice, +itemList.itemsQty);
       setItemList((prevState) => ({ ...prevState, itemsTotal: totals }));
     }, 700);
+
     return () => {
       clearTimeout(timer);
     };
@@ -46,8 +47,6 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
       itemsTotal: "",
     });
   };
-
-  console.log("rendering");
 
   const onChangeHandler = (event) => {
     event.persist();
@@ -121,11 +120,7 @@ const ItemListForm = ({ id, name, qty, price, total, first }) => {
         {!first && (
           <IconButton
             className={classes.icon}
-            onClick={() =>
-              formCtx.deleteItem.bind(
-                `${itemList.itemsName} - ${itemList.itemsQty} - ${itemList.itemsTotal}`
-              )
-            }
+            onClick={formCtx.deleteItem.bind(this, id ? id : 0)}
           >
             <DeleteIcon />
           </IconButton>

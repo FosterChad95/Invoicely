@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useStyles } from "./styles";
 
-const ButtonsNew = ({ onSubmit }) => {
+const ButtonsNew = ({ onSubmit, onDiscard }) => {
   const classes = useStyles();
 
   return (

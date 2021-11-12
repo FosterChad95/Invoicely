@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, clear) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -9,7 +9,10 @@ const useForm = (callback, validate) => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback();
     }
-  }, [errors]);
+    if (clear) {
+      setValues({});
+    }
+  }, [errors, isSubmitting, callback]);
 
   const handleChange = (event) => {
     event.persist();
